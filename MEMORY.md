@@ -26,8 +26,7 @@ Month 1: $2-5K | Month 3: $10-25K | Month 6: $25-50K
 ## Blockers
 - Surplus Intel scraper FAILING
 - Google Calendar/Drive APIs NOT ENABLED (project 921118366904)
-- Mycroft/Irene need model assignment
-- Daily cron NOT CONFIGURED
+- Payment APIs NOT CONFIGURED (Gumroad, Stripe)
 
 ## Decisions
 - Baker Street naming adopted
