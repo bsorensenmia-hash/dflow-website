@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorensen Business Solutions - Professional Services</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }
+        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 3rem 2rem; text-align: center; }
+        header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        header p { font-size: 1.2rem; opacity: 0.9; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 3rem 0; }
+        .service-card { background: white; border-radius: 8px; padding: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+        .service-card h3 { color: #667eea; margin-bottom: 1rem; font-size: 1.5rem; }
+        .service-card ul { list-style: none; margin: 1rem 0; }
+        .service-card li:before { content: "✓ "; color: #667eea; font-weight: bold; }
+        .price { font-size: 1.8rem; font-weight: bold; color: #764ba2; margin: 1rem 0; }
+        .cta { background: #667eea; color: white; padding: 1rem 2rem; border: none; border-radius: 5px; font-size: 1.1rem; cursor: pointer; text-decoration: none; display: inline-block; margin-top: 1rem; }
+        .cta:hover { background: #764ba2; }
+        .contact { background: #f7f7f7; padding: 3rem 2rem; text-align: center; margin-top: 3rem; }
+        .contact h2 { margin-bottom: 1rem; color: #333; }
+        footer { background: #333; color: white; text-align: center; padding: 2rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sorensen Business Solutions</h1>
+        <p>Professional Services That Drive Results</p>
+    </header>
+
+    <div class="container">
+        <div class="services">
+            <div class="service-card">
+                <h3>🎯 SEO & Digital Marketing</h3>
+                <ul>
+                    <li>Keyword research & strategy</li>
+                    <li>On-page optimization</li>
+                    <li>Technical SEO audits</li>
+                    <li>Content optimization</li>
+                    <li>Monthly reporting</li>
+                </ul>
+                <div class="price">$500-2,500/mo</div>
+                <a href="sms:754-319-8919&body=I'm interested in SEO services" class="cta">Get Started</a>
+            </div>
+
+            <div class="service-card">
+                <h3>💼 Bookkeeping Services</h3>
+                <ul>
+                    <li>Monthly reconciliation</li>
+                    <li>Financial statements</li>
+                    <li>Accounts payable/receivable</li>
+                    <li>QuickBooks setup & training</li>
+                    <li>Tax prep support</li>
+                </ul>
+                <div class="price">$300-1,200/mo</div>
+                <a href="sms:754-319-8919&body=I need bookkeeping help" class="cta">Get Started</a>
+            </div>
+
+            <div class="service-card">
+                <h3>📝 Grant Writing</h3>
+                <ul>
+                    <li>Grant research & identification</li>
+                    <li>Proposal writing</li>
+                    <li>Budget development</li>
+                    <li>Compliance documentation</li>
+                    <li>Success rate: 70%+</li>
+                </ul>
+                <div class="price">$1,500-5,000/grant</div>
+                <a href="sms:754-319-8919&body=Tell me about grant writing" class="cta">Get Started</a>
+            </div>
+
+            <div class="service-card">
+                <h3>🛍️ E-Commerce Setup</h3>
+                <ul>
+                    <li>Amazon/eBay store setup</li>
+                    <li>Product sourcing strategy</li>
+                    <li>Listing optimization</li>
+                    <li>Inventory management</li>
+                    <li>Fulfillment planning</li>
+                </ul>
+                <div class="price">$800-3,000</div>
+                <a href="sms:754-319-8919&body=I want to start selling online" class="cta">Get Started</a>
+            </div>
+
+            <div class="service-card">
+                <h3>🏦 Insurance Lead Generation</h3>
+                <ul>
+                    <li>Targeted lead campaigns</li>
+                    <li>CRM setup & training</li>
+                    <li>Follow-up automation</li>
+                    <li>Conversion optimization</li>
+                    <li>Performance tracking</li>
+                </ul>
+                <div class="price">$15-50/lead</div>
+                <a href="sms:754-319-8919&body=I need quality insurance leads" class="cta">Get Started</a>
+            </div>
+
+            <div class="service-card">
+                <h3>🎓 Business Automation Course</h3>
+                <ul>
+                    <li>AI tools for business</li>
+                    <li>Workflow automation</li>
+                    <li>Time-saving systems</li>
+                    <li>Real-world case studies</li>
+                    <li>Lifetime access + updates</li>
+                </ul>
+                <div class="price">$97</div>
+                <a href="sms:754-319-8919&body=I want the automation course" class="cta">Buy Now</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="contact">
+        <h2>Ready to Grow Your Business?</h2>
+        <p style="font-size: 1.2rem; margin: 1rem 0;">Text or call us today for a free consultation</p>
+        <a href="tel:754-319-8919" class="cta" style="font-size: 1.3rem;">📞 754-319-8919</a>
+        <p style="margin-top: 1rem; color: #666;">Sorensen Group Corporation | Pompano Beach, FL</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Sorensen Group Corporation. All rights reserved.</p>
+    </footer>
+</body>
+</html>
