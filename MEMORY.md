@@ -9,15 +9,15 @@ Watson (COO): 561-337-6371
 Watson (COO, groq/qwen3-32b), @mycroft (research), @irene (sales), Wiggins (claude -p), Hudson (finance, internal), Lestrade (compliance, internal)
 
 ## Projects
-- Freelance: ACTIVE — Upwork profile draft created, proposal template built (upwork-profile.md, upwork-proposal-template.md)
-- Affiliate: NOT STARTED — need first niche
-- Grant writing: NOT STARTED
-- Bookkeeping: NOT STARTED — need landing page
-- Auction broker: NOT STARTED
+- Freelance: ACTIVE — Upwork profile + 5 proposal templates + job boards strategy + outreach sequences built
+- Affiliate: ACTIVE — Strategy doc complete, niche = small biz software tools, 10 programs identified
+- Grant writing: ACTIVE — FL grants database, competitor analysis, client intake, Upwork proposal built
+- Bookkeeping: ACTIVE — Landing page built (bookkeeping-landing.html) + email sequence
+- Auction broker: PLANNED — Strategy doc complete, need $500 test capital
 - Surplus alerts: BLOCKED — scraper broken
-- Ecommerce/arbitrage: NOT STARTED — Amazon Pro needed
-- Course: 80% DONE — needs Gumroad setup
-- Insurance leads: PHASE 3
+- Ecommerce/arbitrage: PLANNED — Strategy doc complete, Amazon Pro needed ($39.99/mo)
+- Course: 95% DONE — Full outline + Gumroad sales page built, needs Gumroad account
+- Insurance leads: PHASE 3 — Full lead gen system documented
 - Credit repair: BLOCKED — CROA attorney needed
 
 ## Revenue Targets
