@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D-Flow Corporation — AI Creative Marketing Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #f5f0e8;
+    --dark: #080808;
+    --red: #b8972a;
+    --red-light: #d4af37;
+    --gold: #e8c96a;
+    --gray: #888;
+    --light-gray: #111;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--cream);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    background-image: radial-gradient(ellipse at 20% 20%, rgba(184,151,42,0.04) 0%, transparent 50%),
+                      radial-gradient(ellipse at 80% 80%, rgba(184,151,42,0.04) 0%, transparent 50%);
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(13,13,13,0.95), transparent);
+    backdrop-filter: blur(4px);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-style: italic;
+    color: var(--cream);
+    letter-spacing: 1px;
+  }
+
+  .nav-logo span { color: var(--gold); }
+
+  .nav-cta {
+    background: linear-gradient(135deg, #b8972a, #d4af37, #b8972a);
+    background-size: 200% 200%;
+    color: #080808;
+    border: none;
+    padding: 10px 24px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-position 0.4s;
+    text-decoration: none;
+    animation: shimmer 3s ease infinite;
+  }
+  @keyframes shimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .nav-cta:hover { background-position: 100% 50%; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 40px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(184,151,42,0.1) 0%, transparent 70%);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    align-items: center;
+  }
+
+  .hero-tag {
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-tag::before { content: ''; display: block; width: 30px; height: 1px; background: var(--red); }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    margin-bottom: 28px;
+    color: var(--cream);
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: #ccc;
+    margin-bottom: 40px;
+    max-width: 460px;
+  }
+
+  .hero-actions {
+    display: flex; gap: 16px; flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #b8972a, #d4af37);
+    color: #080808;
+    border: none;
+    padding: 16px 36px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(184,151,42,0.3); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--cream);
+    border: 1px solid rgba(245,240,232,0.3);
+    padding: 16px 36px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--cream); }
+
+  /* Stats bar */
+  .hero-stats {
+    margin-top: 60px;
+    display: flex; gap: 40px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(245,240,232,0.1);
+  }
+  .stat-item { }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--cream);
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-top: 4px;
+  }
+
+  /* Hero visual */
+  .hero-visual {
+    position: relative;
+  }
+
+  .hero-card-main {
+    background: var(--light-gray);
+    border: 1px solid rgba(245,240,232,0.08);
+    padding: 40px;
+    position: relative;
+  }
+
+  .hero-card-main::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 40px; right: 40px; height: 2px;
+    background: linear-gradient(to right, var(--red), var(--gold), transparent);
+  }
+
+  .card-label {
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 24px;
+  }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .content-box {
+    aspect-ratio: 1;
+    background: rgba(245,240,232,0.04);
+    border: 1px solid rgba(245,240,232,0.06);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 8px;
+    transition: all 0.3s;
+  }
+  .content-box:hover {
+    background: rgba(192,57,43,0.1);
+    border-color: rgba(192,57,43,0.3);
+  }
+
+  .content-box-icon { font-size: 1.4rem; }
+  .content-box-text {
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-align: center;
+  }
+
+  .card-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 20px;
+    border-top: 1px solid rgba(245,240,232,0.06);
+  }
+
+  .card-footer-text {
+    font-size: 0.75rem;
+    color: var(--gray);
+  }
+
+  .live-badge {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #4caf50;
+  }
+  .live-dot {
+    width: 6px; height: 6px;
+    background: #4caf50;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* SERVICES */
+  .section {
+    padding: 100px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    margin-bottom: 60px;
+  }
+
+  .section-tag {
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--red); }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--cream);
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  /* Services grid */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(245,240,232,0.06);
+    border: 1px solid rgba(245,240,232,0.06);
+  }
+
+  .service-item {
+    background: var(--dark);
+    padding: 40px 32px;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-item:hover { background: var(--light-gray); }
+  .service-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0; height: 2px;
+    background: var(--red);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
+  .service-item:hover::after { transform: scaleX(1); }
+
+  .service-icon { font-size: 2rem; margin-bottom: 20px; }
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 12px;
+    color: var(--cream);
+  }
+  .service-desc {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: #ccc;
+  }
+
+  /* PACKAGES */
+  .packages-section {
+    padding: 100px 40px;
+    background: var(--light-gray);
+  }
+  .packages-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .packages-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 60px;
+  }
+
+  .package-card {
+    border: 1px solid rgba(245,240,232,0.1);
+    padding: 40px 32px;
+    background: var(--dark);
+    position: relative;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .package-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(192,57,43,0.4);
+  }
+
+  .package-card.featured {
+    border-color: #b8972a;
+    box-shadow: 0 0 40px rgba(184,151,42,0.1);
+  }
+  .package-card.featured::before {
+    content: 'MOST POPULAR';
+    position: absolute;
+    top: -1px; left: 50%; transform: translateX(-50%);
+    background: linear-gradient(135deg, #b8972a, #d4af37);
+    color: #080808;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    padding: 6px 20px;
+  }
+
+  .package-name {
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .package-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .package-price-note {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 32px;
+  }
+
+  .package-delivery {
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(245,240,232,0.1);
+  }
+
+  .package-features {
+    list-style: none;
+    margin-bottom: 36px;
+  }
+  .package-features li {
+    font-size: 1rem;
+    color: #e0e0e0;
+    padding: 10px 0;
+    display: flex; align-items: flex-start; gap: 10px;
+    border-bottom: 1px solid rgba(245,240,232,0.07);
+  }
+  .package-features li::before {
+    content: '—';
+    color: var(--red);
+    flex-shrink: 0;
+  }
+
+  .package-btn {
+    width: 100%;
+    background: transparent;
+    border: 1px solid rgba(245,240,232,0.2);
+    color: var(--cream);
+    padding: 14px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+  }
+  .package-btn:hover, .package-card.featured .package-btn {
+    background: linear-gradient(135deg, #b8972a, #d4af37);
+    border-color: #b8972a;
+    color: #080808;
+    font-weight: 600;
+  }
+
+  /* HOW IT WORKS */
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    margin-top: 60px;
+  }
+
+  .process-step { position: relative; }
+  .process-step::after {
+    content: '→';
+    position: absolute;
+    top: 16px; right: -24px;
+    color: rgba(192,57,43,0.4);
+    font-size: 1.2rem;
+  }
+  .process-step:last-child::after { display: none; }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 300;
+    color: rgba(245,240,232,0.06);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: var(--cream);
+    margin-bottom: 10px;
+  }
+  .step-desc {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: #ccc;
+  }
+
+  /* CONTACT / CTA */
+  .cta-section {
+    padding: 120px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(184,151,42,0.1) 0%, transparent 70%);
+  }
+
+  .cta-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .cta-section h2 em { font-style: italic; color: var(--gold); }
+
+  .cta-section p {
+    color: var(--gray);
+    font-size: 1rem;
+    margin-bottom: 48px;
+    position: relative;
+  }
+
+  .cta-actions {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    position: relative;
+  }
+
+  .contact-info {
+    margin-top: 48px;
+    display: flex; gap: 40px; justify-content: center; flex-wrap: wrap;
+    position: relative;
+  }
+  .contact-item {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 1rem;
+    color: #ccc;
+  }
+  .contact-item a {
+    color: var(--cream);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-item a:hover { color: var(--red); }
+
+  /* FOOTER */
+  footer {
+    padding: 40px;
+    border-top: 1px solid rgba(245,240,232,0.06);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--cream);
+  }
+  .footer-logo span { color: var(--gold); }
+  footer p {
+    font-size: 0.75rem;
+    color: var(--gray);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-tag { animation: fadeUp 0.6s ease forwards; }
+  .hero h1 { animation: fadeUp 0.6s ease 0.1s both; }
+  .hero-desc { animation: fadeUp 0.6s ease 0.2s both; }
+  .hero-actions { animation: fadeUp 0.6s ease 0.3s both; }
+  .hero-stats { animation: fadeUp 0.6s ease 0.4s both; }
+  .hero-visual { animation: fadeUp 0.6s ease 0.2s both; }
+
+  /* DIVIDER */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(245,240,232,0.1), transparent);
+    margin: 0 auto;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 60px; }
+    .hero-visual { order: -1; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .packages-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .process-grid { grid-template-columns: 1fr 1fr; }
+    .process-step::after { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 16px 20px; }
+    .hero, .section { padding-left: 20px; padding-right: 20px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .process-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 24px; flex-wrap: wrap; }
+    footer { padding: 30px 20px; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><span>D-Flow</span> Corporation</div>
+  <a href="/cdn-cgi/l/email-protection#85c4ebffede0e9e4e4ebe1f7e0ece0f3f6eee4c5e2e8e4ece9abe6eae8" class="nav-cta">Get Started</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-content">
+      <div class="hero-tag">AI Creative Marketing Agency</div>
+      <h1>Content that <em>sells</em> while you sleep</h1>
+      <p class="hero-desc">We generate AI photos, videos, UGC content, and manage your social media on autopilot — so your business grows without lifting a finger.</p>
+      <div class="hero-actions">
+        <a href="/cdn-cgi/l/email-protection#35745b4f5d505954545b5147505c5043465e54755258545c591b565a58" class="btn-primary">Book a Free Call</a>
+        <a href="#packages" class="btn-ghost">View Packages</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">24h</div>
+          <div class="stat-label">Fastest Delivery</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">5+</div>
+          <div class="stat-label">Platforms</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">AI-Generated</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-card-main">
+        <div class="card-label">Content Dashboard — Live</div>
+        <div class="content-grid">
+          <div class="content-box">
+            <div class="content-box-icon">🖼️</div>
+            <div class="content-box-text">AI Photos</div>
+          </div>
+          <div class="content-box">
+            <div class="content-box-icon">🎬</div>
+            <div class="content-box-text">UGC Video</div>
+          </div>
+          <div class="content-box">
+            <div class="content-box-icon">🤖</div>
+            <div class="content-box-text">AI Avatar</div>
+          </div>
+          <div class="content-box">
+            <div class="content-box-icon">📱</div>
+            <div class="content-box-text">Auto-Post</div>
+          </div>
+          <div class="content-box">
+            <div class="content-box-icon">💬</div>
+            <div class="content-box-text">Chatbot</div>
+          </div>
+          <div class="content-box">
+            <div class="content-box-icon">📊</div>
+            <div class="content-box-text">Strategy</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="card-footer-text">Instagram · TikTok · YouTube · Facebook</div>
+          <div class="live-badge"><div class="live-dot"></div> Active</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SERVICES -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">What We Do</div>
+    <h2 class="section-title">Everything your brand needs,<br><em>fully automated</em></h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-item">
+      <div class="service-icon">🖼️</div>
+      <div class="service-name">AI Photo Generation</div>
+      <div class="service-desc">High-resolution product and lifestyle photos generated by AI — no photoshoot needed. Perfect for ads, stories, and feeds.</div>
+    </div>
+    <div class="service-item">
+      <div class="service-icon">🎬</div>
+      <div class="service-name">AI Video & UGC</div>
+      <div class="service-desc">Scroll-stopping UGC-style videos with AI avatars. 5+ videos per day, ready to post across all platforms automatically.</div>
+    </div>
+    <div class="service-item">
+      <div class="service-icon">🤖</div>
+      <div class="service-name">AI Avatars</div>
+      <div class="service-desc">Your own digital brand ambassador — a custom AI avatar that speaks, sells, and represents your brand 24/7.</div>
+    </div>
+    <div class="service-item">
+      <div class="service-icon">📲</div>
+      <div class="service-name">Auto-Posting & SMM</div>
+      <div class="service-desc">We post your content automatically to Instagram, TikTok, YouTube, and Facebook on a custom schedule.</div>
+    </div>
+    <div class="service-item">
+      <div class="service-icon">💬</div>
+      <div class="service-name">AI Chatbot Sales</div>
+      <div class="service-desc">An intelligent chatbot engages your followers in comments and DMs, answers questions, and converts them into buyers.</div>
+    </div>
+    <div class="service-item">
+      <div class="service-icon">📈</div>
+      <div class="service-name">Strategy & Analytics</div>
+      <div class="service-desc">Custom content strategy built around your product, audience, and goals — with regular performance reporting.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">The Process</div>
+    <h2 class="section-title">From zero to <em>selling</em><br>in 4 simple steps</h2>
+  </div>
+  <div class="process-grid">
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <div class="step-title">Discovery Call</div>
+      <div class="step-desc">We learn your product, brand, target audience, and goals in a 30-min strategy session.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <div class="step-title">Content Creation</div>
+      <div class="step-desc">Our AI generates photos, videos, and scripts tailored to your brand voice and aesthetic.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <div class="step-title">Review & Approve</div>
+      <div class="step-desc">You review the content. We revise until it's exactly right. Your approval, your control.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">04</div>
+      <div class="step-title">Launch & Automate</div>
+      <div class="step-desc">Content goes live across all platforms on autopilot. The chatbot handles engagement and sales.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- PACKAGES -->
+<section class="packages-section" id="packages">
+  <div class="packages-inner">
+    <div class="section-header">
+      <div class="section-tag">Pricing</div>
+      <h2 class="section-title">Choose your <em>package</em></h2>
+    </div>
+    <div class="packages-grid">
+
+      <div class="package-card">
+        <div class="package-name">Starter Package</div>
+        <div class="package-price">$750</div>
+        <div class="package-price-note">one-time</div>
+        <div class="package-delivery">⚡ Delivery: 24 hours</div>
+        <ul class="package-features">
+          <li>6 high-resolution AI photos</li>
+          <li>2 short AI videos (6 sec each)</li>
+          <li>1 ready-to-post Reel</li>
+          <li>1 round of revisions</li>
+          <li>Commercial usage rights</li>
+        </ul>
+        <a href="/cdn-cgi/l/email-protection#1c5d72667479707d7d72786e7975796a6f777d5c7b717d7570327f7371236f697e76797f68214f687d6e68796e3c4c7d7f777d7b79" class="package-btn">Get Started</a>
+      </div>
+
+      <div class="package-card featured">
+        <div class="package-name">Signature Package</div>
+        <div class="package-price">$1,300</div>
+        <div class="package-price-note">one-time</div>
+        <div class="package-delivery">⚡ Delivery: 72 hours</div>
+        <ul class="package-features">
+          <li>15 high-resolution AI photos</li>
+          <li>5 short AI videos (7 sec each)</li>
+          <li>3 ready-to-post Reels</li>
+          <li>2 rounds of revisions</li>
+          <li>60-day commercial rights</li>
+          <li>Organic + paid ads usage</li>
+        </ul>
+        <a href="/cdn-cgi/l/email-protection#c584abbfada0a9a4a4aba1b7a0aca0b3b6aea485a2a8a4aca9eba6aaa8fab6b0a7afa0a6b1f896aca2aba4b1b0b7a0e595a4a6aea4a2a0" class="package-btn">Get Started</a>
+      </div>
+
+      <div class="package-card">
+        <div class="package-name">Monthly Retainer</div>
+        <div class="package-price">$2,500</div>
+        <div class="package-price-note">per month</div>
+        <div class="package-delivery">⚡ Delivery: 7 days setup</div>
+        <ul class="package-features">
+          <li>30 AI photos + 10 short videos/mo</li>
+          <li>5 ready-to-post Reels/month</li>
+          <li>5 rounds of revisions</li>
+          <li>Full whitelisting for ads</li>
+          <li>60-day commercial rights</li>
+          <li>Auto-posting included</li>
+        </ul>
+        <a href="/cdn-cgi/l/email-protection#efae8195878a838e8e818b9d8a868a999c848eaf88828e8683c18c8082d09c9a8d858a8c9bd2a280819b878396cfbd8a9b8e86818a9d" class="package-btn">Get Started</a>
+      </div>
+
+    </div>
+
+    <!-- Custom package note -->
+    <div style="text-align:center; margin-top:48px; padding:32px; border:1px solid rgba(245,240,232,0.08);">
+      <div style="font-size:0.65rem; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:12px;">Custom Solution</div>
+      <p style="font-family:'Cormorant Garamond',serif; font-size:1.4rem; color:var(--cream); margin-bottom:16px;">Need 5 UGC videos per day with chatbot + auto-posting?</p>
+      <p style="font-size:0.85rem; color:var(--gray); margin-bottom:24px;">We build fully custom AI content systems starting at $2,500/month. Let's talk about what you need.</p>
+      <a href="/cdn-cgi/l/email-protection#08496672606d646969666c7a6d616d7e7b6369486f65696164266b6765377b7d6a626d6b7c354b7d7b7c67652858696b63696f6d284166797d617a71" class="btn-primary">Request Custom Quote</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Ready to let AI<br><em>grow your business?</em></h2>
+  <p>Book a free 30-minute strategy call. No commitment, just results.</p>
+  <div class="cta-actions">
+    <a href="/cdn-cgi/l/email-protection#31705f4b59545d50505f554354585447425a5071565c50585d1f525e5c" class="btn-primary">Email Us Now</a>
+    <a href="tel:+17542958486" class="btn-ghost">Call +1 (754) 295-84-86</a>
+  </div>
+  <div class="contact-info">
+    <div class="contact-item">
+      📧 <a href="/cdn-cgi/l/email-pro
+    <div class="contact-item">
+      📞 <a href="tel:+17542958486">+1 (754) 295-84-86</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><span>D-Flow</span> Corporation</div>
+  <p>© 2025 D-Flow Corporation. AI Creative Marketing Agency.</p>
+  <p style="font-size:0.7rem; color: #555;">AI Photos · AI Video · UGC · SMM · Chatbots</p>
+</footer>
+
+</body>
+</html>
