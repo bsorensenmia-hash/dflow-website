@@ -1,142 +1,359 @@
-# D-Flow Corporation — AI Creative Marketing Agency
-**Website Repository Guide**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D-Flow Corporation — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#060606;--gold:#C9A84C;--gold-light:#E8C96A;--cream:#F5F0E8;
+  --gray:#777;--dark-gray:#1a1a1a;
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--cream);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold);color:var(--black)}
 
-## 🗂️ Project Structure
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 48px;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(6,6,6,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,168,76,0.1)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:400;letter-spacing:1px;text-decoration:none;color:var(--cream)}
+.nav-logo span{color:var(--gold-light)}
+.nav-back{font-size:.7rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--gray);text-decoration:none;transition:color .3s;display:flex;align-items:center;gap:8px}
+.nav-back:hover{color:var(--gold-light)}
 
-```
-dflow-project/
-│
-├── index.html              ← MAIN LANDING PAGE (use this!)
-├── portfolio.html          ← Full portfolio page with all work
-├── landing-v1.html         ← Old version (archive, do not delete)
-│
-└── assets/
-    ├── hero/               ← Hero slideshow images (5 images)
-    │   ├── hero1.png       — Black dress + mirrors (dark luxury)
-    │   ├── hero2.png       — Feather dress (fashion)
-    │   ├── hero3.png       — White office (CEO)
-    │   ├── hero4.png       — Towel moment (viral)
-    │   └── fashion2.png    — Beach fashion
-    │
-    ├── avatar/
-    │   └── avatar.png      ← AI assistant avatar (D-FLOW badge)
-    │
-    ├── models/             ← AI talent roster (4 models)
-    │   ├── marisol.jpg     — Vitiligo model (trend pioneer, Sep 2024)
-    │   ├── amara.jpg       — Dark skin editorial
-    │   ├── luna.jpg        — Albino ethereal
-    │   └── zoe.jpg         — Blonde curly lifestyle
-    │
-    ├── fashion/            ← Fashion lookbook images
-    │   ├── fashion1.webp   — Beach close-up
-    │   ├── fashion2.png    — Beach full body
-    │   └── fashion3.webp   — Beach cinematic
-    │
-    └── portfolio/
-        ├── jewelry/        ← 5 images (rings with flowers, cockatoo, wolf)
-        ├── beauty/         ← 8 images (Peach Body Oil + Hourglass foundation)
-        ├── fragrance/      ← 6 images (Miu Miu campaign series)
-        └── food/           ← 7 images (caviar, wine, caprese, pasta, wings)
-```
+/* HERO */
+.port-hero{min-height:70vh;display:flex;align-items:center;justify-content:center;padding:120px 48px 80px;text-align:center;position:relative;overflow:hidden}
+.port-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(201,168,76,.06) 0%,transparent 65%)}
+.port-hero-inner{position:relative;max-width:820px}
+.port-badge{display:inline-flex;align-items:center;gap:14px;font-size:.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:28px;opacity:0;animation:fadeUp .8s .2s forwards}
+.port-badge::before,.port-badge::after{content:'';width:40px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.port-badge::after{background:linear-gradient(90deg,var(--gold),transparent)}
+.port-hero h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,7vw,6rem);font-weight:300;line-height:1.05;margin-bottom:24px;opacity:0;animation:fadeUp .8s .4s forwards}
+.port-hero h1 em{font-style:italic;color:var(--gold-light)}
+.port-hero p{color:#aaa;font-size:1.05rem;line-height:1.8;margin-bottom:48px;opacity:0;animation:fadeUp .8s .6s forwards}
+.port-stats{display:flex;gap:56px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp .8s .8s forwards}
+.stat-n{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:300}
+.stat-l{font-size:.62rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--gray);margin-top:6px}
 
----
+/* FILTERS */
+.filters{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:40px 48px 36px;position:sticky;top:72px;z-index:50;background:rgba(6,6,6,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(245,240,232,.04)}
+.fbtn{background:transparent;border:1px solid rgba(245,240,232,.1);color:var(--gray);padding:10px 24px;font-family:'DM Sans',sans-serif;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.fbtn:hover,.fbtn.active{border-color:var(--gold);color:var(--gold-light)}
 
-## 📄 Pages
+/* GALLERY */
+.gallery{padding:60px 48px 120px;max-width:1440px;margin:0 auto}
+.cat{margin-bottom:96px;opacity:0;transform:translateY(24px);transition:all .6s ease}
+.cat.visible{opacity:1;transform:translateY(0)}
+.cat-hdr{display:flex;align-items:baseline;gap:16px;margin-bottom:32px;padding-bottom:18px;border-bottom:1px solid rgba(245,240,232,.06)}
+.cat-title{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:300}
+.cat-count{font-size:.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-left:auto}
+.grid{display:grid;gap:10px}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.ghero{grid-template-columns:2fr 1fr 1fr}
+.ghero .ph:first-child{grid-row:span 2}
 
-### `index.html` — Main Landing Page
-The primary website. Contains:
-- **Hero** — cinematic slideshow with "Your competitor already looks like this. Do you?"
-- **Ticker** — gold scrolling bar with services
-- **Before/After slider** — interactive drag comparison
-- **AI Models roster** — horizontal scroll
-- **9 Packages** with category filter tabs
-- **Hands-Free Growth** — $4,997/mo featured package
-- **About section** — CEO story + stats
-- **Towel moment** — viral brand personality section
-- **CTA** — email + phone
-- **AI Chat widget** — avatar-powered chat assistant
+/* PHOTO CARDS */
+.ph{position:relative;overflow:hidden;background:#111;cursor:pointer;aspect-ratio:1}
+.ghero .ph:first-child{aspect-ratio:unset}
+.ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.25,.46,.45,.94),filter .4s}
+.ph:hover img{transform:scale(1.06)}
+.ph-over{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,6,.8) 0%,rgba(6,6,6,0) 50%);opacity:0;transition:opacity .35s;display:flex;align-items:flex-end;padding:24px}
+.ph:hover .ph-over{opacity:1}
+.ph-lbl{font-size:.65rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold-light)}
 
-### `portfolio.html` — Portfolio Gallery
-Full work showcase. Contains:
-- Jewelry & Luxury
-- Fragrance (Miu Miu series)
-- Beauty & Skincare
-- Food & Drink
-- AI chat widget
+/* LIGHTBOX */
+.lb{display:none;position:fixed;inset:0;z-index:9999;background:rgba(6,6,6,.97);align-items:center;justify-content:center;padding:40px;cursor:zoom-out}
+.lb.open{display:flex}
+.lb img{max-width:100%;max-height:90vh;object-fit:contain;animation:lbIn .3s ease}
+.lb-x{position:absolute;top:24px;right:32px;font-size:2rem;color:var(--cream);cursor:pointer;background:none;border:none;opacity:.5;transition:opacity .2s;line-height:1}
+.lb-x:hover{opacity:1}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:none;border:1px solid rgba(201,168,76,.3);color:var(--gold-light);width:48px;height:48px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.2rem;transition:all .3s}
+.lb-nav:hover{background:rgba(201,168,76,.1);border-color:var(--gold)}
+.lb-prev{left:24px}
+.lb-next{right:24px}
 
----
+/* CTA */
+.port-cta{text-align:center;padding:100px 48px 120px;border-top:1px solid rgba(245,240,232,.05);position:relative}
+.port-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(201,168,76,.04) 0%,transparent 60%)}
+.port-cta h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.8rem);font-weight:300;margin-bottom:16px;position:relative}
+.port-cta h2 em{font-style:italic;color:var(--gold-light)}
+.port-cta p{color:var(--gray);margin-bottom:40px;font-size:1rem;position:relative}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--black);border:none;padding:17px 44px;font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-block;transition:all .4s;position:relative;overflow:hidden}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(201,168,76,.3)}
 
-## 💰 Packages & Pricing
+/* CHAT WIDGET */
+.chat-w{position:fixed;bottom:28px;right:28px;z-index:900;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+.chat-b{background:var(--dark-gray);border:1px solid rgba(201,168,76,.25);padding:20px 24px;max-width:300px;font-size:.88rem;line-height:1.7;color:var(--cream);display:none;animation:fadeUp .4s ease;position:relative}
+.chat-b.show{display:block}
+.chat-b::after{content:'';position:absolute;bottom:-8px;right:28px;width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:8px solid rgba(201,168,76,.25)}
+.chat-x{position:absolute;top:10px;right:12px;background:none;border:none;color:var(--gray);font-size:1.1rem;cursor:pointer;line-height:1}
+.chat-acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.chat-act{background:transparent;border:1px solid rgba(201,168,76,.35);color:var(--gold-light);padding:7px 14px;font-size:.68rem;letter-spacing:1px;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
+.chat-act:hover{background:rgba(201,168,76,.1)}
+.chat-av{width:64px;height:64px;border-radius:50%;overflow:hidden;border:2px solid var(--gold);cursor:pointer;transition:all .3s;box-shadow:0 4px 24px rgba(201,168,76,.25)}
+.chat-av:hover{transform:scale(1.08);box-shadow:0 8px 32px rgba(201,168,76,.4)}
+.chat-av img{width:100%;height:100%;object-fit:cover;object-position:top}
 
-| Package | Price | Delivery |
-|---------|-------|----------|
-| Starter | $750 | 24 hours |
-| Signature | $1,300 | 72 hours |
-| Monthly Retainer | $2,500/mo | 7 days setup |
-| AI Avatar Expert | $1,200 | 72 hours |
-| Your Twin UGC | $1,500 | 72 hours |
-| UGC Many Models | $1,800 | 5 days |
-| Restaurant Content | $1,997/mo | 5 days setup |
-| Fashion Lookbook | $1,500 | 5 days |
-| Product Launch Pack | $2,500 | 5 days |
-| **Hands-Free Growth** | **$4,997/mo** | 7 days setup |
+/* FOOTER */
+footer{padding:40px 48px;border-top:1px solid rgba(245,240,232,.06);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.fl{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:400}
+.fl span{color:var(--gold-light)}
+footer p{font-size:.72rem;color:var(--gray)}
+.fs{font-size:.62rem;color:rgba(245,240,232,.2);letter-spacing:2px}
 
----
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes lbIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
 
-## 🎨 Brand Guidelines
+/* RESPONSIVE */
+@media(max-width:900px){
+  .ghero,.g4{grid-template-columns:repeat(2,1fr)}
+  .ghero .ph:first-child{grid-row:span 1;aspect-ratio:1}
+  .g3{grid-template-columns:repeat(2,1fr)}
+  nav{padding:0 24px}
+  .port-hero{padding:100px 24px 60px}
+  .filters{padding:24px;top:72px}
+  .gallery{padding:40px 24px 80px}
+  .port-cta{padding:80px 24px}
+  footer{padding:32px 24px}
+}
+@media(max-width:600px){
+  .g3,.g4,.ghero{grid-template-columns:1fr 1fr}
+  .chat-w{bottom:16px;right:16px}
+  .chat-b{max-width:260px}
+  .port-stats{gap:32px}
+}
+</style>
+</head>
+<body>
 
-**Colors:**
-- Black: `#060606`
-- Gold primary: `#C9A84C`
-- Gold light: `#E8C96A`
-- Cream: `#F5F0E8`
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo"><span>D-Flow</span> Corporation</a>
+  <a href="index.html" class="nav-back">&larr; Main Site</a>
+</nav>
 
-**Fonts:**
-- Display: `Playfair Display` (serif, italic for elegance)
-- Body: `DM Sans` (clean, modern)
+<!-- HERO -->
+<section class="port-hero">
+  <div class="port-hero-inner">
+    <div class="port-badge">AI-Generated Portfolio</div>
+    <h1>Every pixel.<br><em>Pure AI.</em></h1>
+    <p>No photoshoots. No studios. No limits.<br>This is what AI can create for your brand.</p>
+    <div class="port-stats">
+      <div><div class="stat-n">5+</div><div class="stat-l">Industries</div></div>
+      <div><div class="stat-n">100%</div><div class="stat-l">AI Generated</div></div>
+      <div><div class="stat-n">24h</div><div class="stat-l">Turnaround</div></div>
+    </div>
+  </div>
+</section>
 
-**Tone:** Luxury · Editorial · Confident · Forward-thinking
-**DNA:** Vogue meets AI. Lagerfeld meets Technology. Future meets Classic.
+<!-- FILTERS -->
+<div class="filters" id="gallery">
+  <button class="fbtn active" onclick="filt('all',this)">All Work</button>
+  <button class="fbtn" onclick="filt('jewelry',this)">Jewelry</button>
+  <button class="fbtn" onclick="filt('fragrance',this)">Fragrance</button>
+  <button class="fbtn" onclick="filt('beauty',this)">Beauty</button>
+  <button class="fbtn" onclick="filt('food',this)">Food & Drink</button>
+  <button class="fbtn" onclick="filt('fashion',this)">Fashion</button>
+</div>
 
----
+<!-- GALLERY -->
+<div class="gallery">
 
-## 📞 Contact
+  <!-- JEWELRY -->
+  <div class="cat" data-cat="jewelry">
+    <div class="cat-hdr">
+      <div class="cat-title">Jewelry & Luxury</div>
+      <div class="cat-count">AI Product Photography</div>
+    </div>
+    <div class="grid ghero">
+      <div class="ph" onclick="opn('j2.png')"><img src="assets/portfolio/jewelry/j2.png" alt="Rings in calla lily"><div class="ph-over"><span class="ph-lbl">Emerald & Ruby · Calla Lily</span></div></div>
+      <div class="ph" onclick="opn('hero1.png')"><img src="assets/hero/hero1.png" alt="Miu Miu sunset"><div class="ph-over"><span class="ph-lbl">Campaign · Sunset</span></div></div>
+      <div class="ph" onclick="opn('hero4.png')"><img src="assets/hero/hero4.png" alt="Fragrance wide"><div class="ph-over"><span class="ph-lbl">Campaign · Close-up</span></div></div>
+    </div>
+  </div>
 
-- **Email:** Anzhelaandreievska@gmail.com
-- **Phone:** +1 (754) 295-84-86
-- **Founder:** Anzhela Andreievska
+  <!-- FRAGRANCE -->
+  <div class="cat" data-cat="fragrance">
+    <div class="cat-hdr">
+      <div class="cat-title">Fragrance</div>
+      <div class="cat-count">AI Campaign Photography</div>
+    </div>
+    <div class="grid g3">
+      <div class="ph" onclick="opn('f1.png')"><img src="assets/portfolio/fragrance/f1.png" alt=""><div class="ph-over"><span class="ph-lbl">Sunset · Tropical</span></div></div>
+      <div class="ph" onclick="opn('f2.png')"><img src="assets/portfolio/fragrance/f2.png" alt=""><div class="ph-over"><span class="ph-lbl">Coconut Splash</span></div></div>
+      <div class="ph" onclick="opn('f3.png')"><img src="assets/portfolio/fragrance/f3.png" alt=""><div class="ph-over"><span class="ph-lbl">Coconut · Wide</span></div></div>
+      <div class="ph" onclick="opn('f4.png')"><img src="assets/portfolio/fragrance/f4.png" alt=""><div class="ph-over"><span class="ph-lbl">Marble · Eucalyptus</span></div></div>
+      <div class="ph" onclick="opn('f5.png')"><img src="assets/portfolio/fragrance/f5.png" alt=""><div class="ph-over"><span class="ph-lbl">Jasmine · Soft</span></div></div>
+      <div class="ph" onclick="opn('f6.png')"><img src="assets/portfolio/fragrance/f6.png" alt=""><div class="ph-over"><span class="ph-lbl">Tropical Mix</span></div></div>
+    </div>
+  </div>
 
----
+  <!-- BEAUTY -->
+  <div class="cat" data-cat="beauty">
+    <div class="cat-hdr">
+      <div class="cat-title">Beauty & Skincare</div>
+      <div class="cat-count">AI Product Photography</div>
+    </div>
+    <div class="grid g4">
+      <div class="ph" onclick="opn('b1.png')"><img src="assets/portfolio/beauty/b1.png" alt=""><div class="ph-over"><span class="ph-lbl">Body Oil · Flatlay</span></div></div>
+      <div class="ph" onclick="opn('b2.png')"><img src="assets/portfolio/beauty/b2.png" alt=""><div class="ph-over"><span class="ph-lbl">Body Oil · Glow</span></div></div>
+      <div class="ph" onclick="opn('b3.png')"><img src="assets/portfolio/beauty/b3.png" alt=""><div class="ph-over"><span class="ph-lbl">Body Oil · Splash</span></div></div>
+      <div class="ph" onclick="opn('b4.png')"><img src="assets/portfolio/beauty/b4.png" alt=""><div class="ph-over"><span class="ph-lbl">Body Oil · Clean</span></div></div>
+      <div class="ph" onclick="opn('m2.png')"><img src="assets/portfolio/beauty/m2.png" alt=""><div class="ph-over"><span class="ph-lbl">Foundation · Swatches</span></div></div>
+      <div class="ph" onclick="opn('m3.png')"><img src="assets/portfolio/beauty/m3.png" alt=""><div class="ph-over"><span class="ph-lbl">Foundation · Swatch</span></div></div>
+      <div class="ph" onclick="opn('m4.png')"><img src="assets/portfolio/beauty/m4.png" alt=""><div class="ph-over"><span class="ph-lbl">Foundation · Drop</span></div></div>
+      <div class="ph" onclick="opn('fashion2_1.png')"><img src="assets/fashion/fashion2_1.png" alt=""><div class="ph-over"><span class="ph-lbl">Skincare · Lifestyle</span></div></div>
+    </div>
+  </div>
 
-## 🚀 Next Steps (To Do)
+  <!-- FOOD -->
+  <div class="cat" data-cat="food">
+    <div class="cat-hdr">
+      <div class="cat-title">Food & Drink</div>
+      <div class="cat-count">AI Restaurant & Product Photography</div>
+    </div>
+    <div class="grid g3">
+      <div class="ph" onclick="opn('fd6.png')"><img src="assets/portfolio/food/fd6.png" alt=""><div class="ph-over"><span class="ph-lbl">Caviar · Fine Dining</span></div></div>
+      <div class="ph" onclick="opn('fd2.jpg')"><img src="assets/portfolio/food/fd2.jpg" alt=""><div class="ph-over"><span class="ph-lbl">Wine · Luxury</span></div></div>
+      <div class="ph" onclick="opn('fd7.jpg')"><img src="assets/portfolio/food/fd7.jpg" alt=""><div class="ph-over"><span class="ph-lbl">Caprese · Dark Mood</span></div></div>
+      <div class="ph" onclick="opn('fd1.jpg')"><img src="assets/portfolio/food/fd1.jpg" alt=""><div class="ph-over"><span class="ph-lbl">Caprese · Flying</span></div></div>
+      <div class="ph" onclick="opn('fd4.jpg')"><img src="assets/portfolio/food/fd4.jpg" alt=""><div class="ph-over"><span class="ph-lbl">Chocolate Platter</span></div></div>
+      <div class="ph" onclick="opn('fd5.jpg')"><img src="assets/portfolio/food/fd5.jpg" alt=""><div class="ph-over"><span class="ph-lbl">Grilled Fish · Smoky</span></div></div>
+    </div>
+  </div>
 
-- [ ] Host on domain (recommended: dflowcorp.com or dflow.agency)
-- [ ] Connect Stripe payment for package checkout
-- [ ] Set up intake form (Typeform) after payment
-- [ ] Connect AI voice agent (Bland.ai) for automated calls
-- [ ] Set up Make.com automation for client onboarding
-- [ ] Create TikTok/Instagram accounts for D-Flow
-- [ ] Film first before/after viral video using Higgsfield
-- [ ] Set up Google Analytics
-- [ ] Add Spanish language toggle (Phase 2)
+  <!-- FASHION -->
+  <div class="cat" data-cat="fashion">
+    <div class="cat-hdr">
+      <div class="cat-title">Fashion & Editorial</div>
+      <div class="cat-count">AI Model Photography</div>
+    </div>
+    <div class="grid g3">
+      <div class="ph" onclick="opn('marisol.jpg')"><img src="assets/models/marisol.jpg" alt=""><div class="ph-over"><span class="ph-lbl">Marisol · Beach Editorial</span></div></div>
+      <div class="ph" onclick="opn('amara.jpg')"><img src="assets/models/amara.jpg" alt=""><div class="ph-over"><span class="ph-lbl">Amara · Dark Skin Beauty</span></div></div>
+      <div class="ph" onclick="opn('zoe.jpg')"><img src="assets/models/zoe.jpg" alt=""><div class="ph-over"><span class="ph-lbl">Zoe · Lifestyle</span></div></div>
+      <div class="ph" onclick="opn('fashion2.png')"><img src="assets/fashion/fashion2.png" alt=""><div class="ph-over"><span class="ph-lbl">Fragrance · Cream Splash</span></div></div>
+      <div class="ph" onclick="opn('fashion3.webp')"><img src="assets/fashion/fashion3.webp" alt=""><div class="ph-over"><span class="ph-lbl">Beach · Cinematic</span></div></div>
+      <div class="ph" onclick="opn('fashion2_1.png')"><img src="assets/fashion/fashion2_1.png" alt=""><div class="ph-over"><span class="ph-lbl">Lifestyle · Natural</span></div></div>
+    </div>
+  </div>
 
----
+</div>
 
-## 🔧 How to Deploy
+<!-- CTA -->
+<section class="port-cta">
+  <h2>Want content like this<br>for <em>your brand?</em></h2>
+  <p>Book a free strategy call. We'll show you exactly what AI can do for you.</p>
+  <a href="mailto:Anzhelaandreievska@gmail.com" class="btn-gold">Get Started Today</a>
+</section>
 
-**Option 1 — Netlify (free, fastest):**
-1. Go to netlify.com
-2. Drag the entire `dflow-project` folder
-3. Your site is live in 60 seconds
+<!-- FOOTER -->
+<footer>
+  <div class="fl"><span>D-Flow</span> Corporation</div>
+  <p>&copy; 2025 D-Flow Corporation. AI Creative Marketing Agency.</p>
+  <div class="fs">AI Photos &middot; AI Video &middot; UGC &middot; SMM</div>
+</footer>
 
-**Option 2 — GitHub Pages:**
-1. Create repo on github.com
-2. Upload all files
-3. Settings → Pages → Deploy from main branch
+<!-- LIGHTBOX -->
+<div class="lb" id="lb" onclick="if(event.target===this)closeLb()">
+  <button class="lb-x" onclick="closeLb()">&#10005;</button>
+  <button class="lb-nav lb-prev" onclick="event.stopPropagation();navLb(-1)">&#8249;</button>
+  <button class="lb-nav lb-next" onclick="event.stopPropagation();navLb(1)">&#8250;</button>
+  <img id="lb-img" src="" alt="">
+</div>
 
-**Option 3 — Custom hosting:**
-Upload all files to your hosting keeping the folder structure intact. `index.html` must be in root.
+<!-- CHAT WIDGET -->
+<div class="chat-w" id="chatW">
+  <div class="chat-b" id="chatB">
+    <button class="chat-x" onclick="document.getElementById('chatB').classList.remove('show')">&#10005;</button>
+    <div id="chatTxt">Hi! I'm the D-Flow AI assistant. What kind of content do you need?</div>
+    <div class="chat-acts" id="chatActs">
+      <button class="chat-act" onclick="rep('product')">Product Photos</button>
+      <button class="chat-act" onclick="rep('video')">AI Videos</button>
+      <button class="chat-act" onclick="rep('smm')">Full SMM</button>
+    </div>
+  </div>
+  <div class="chat-av" onclick="document.getElementById('chatB').classList.toggle('show')">
+    <img src="assets/avatar.png" alt="D-Flow AI Assistant">
+  </div>
+</div>
 
----
+<script>
+// Lightbox with navigation
+let lbImages=[];
+let lbIndex=0;
+function buildImageList(){
+  lbImages=[];
+  document.querySelectorAll('.cat').forEach(cat=>{
+    if(cat.style.display==='none')return;
+    cat.querySelectorAll('.ph').forEach(ph=>{
+      const img=ph.querySelector('img');
+      if(img)lbImages.push(img.src);
+    });
+  });
+}
+function opn(s){
+  buildImageList();
+  const idx=lbImages.findIndex(i=>i.endsWith(s));
+  lbIndex=idx>=0?idx:0;
+  document.getElementById('lb-img').src=s;
+  document.getElementById('lb').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLb(){
+  document.getElementById('lb').classList.remove('open');
+  document.body.style.overflow='';
+}
+function navLb(dir){
+  lbIndex=(lbIndex+dir+lbImages.length)%lbImages.length;
+  document.getElementById('lb-img').src=lbImages[lbIndex];
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')closeLb();
+  if(e.key==='ArrowLeft'&&document.getElementById('lb').classList.contains('open'))navLb(-1);
+  if(e.key==='ArrowRight'&&document.getElementById('lb').classList.contains('open'))navLb(1);
+});
 
-*D-Flow Corporation © 2025. AI Creative Marketing Agency.*
+// Category filter
+function filt(c,b){
+  document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  document.querySelectorAll('.cat').forEach(x=>{
+    x.style.display=(c==='all'||x.dataset.cat===c)?'':'none';
+  });
+}
+
+// Scroll reveal
+const cats=document.querySelectorAll('.cat');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
+},{threshold:0.1});
+cats.forEach(c=>obs.observe(c));
+
+// Chat widget
+setTimeout(()=>document.getElementById('chatB').classList.add('show'),3500);
+const R={
+  product:{t:"Great choice! AI product photos start at $750 — delivered in 24 hours. Want to see our packages or book a call?",a:[{l:"See Packages",k:"packages"},{l:"Book a Call",k:"call"}]},
+  video:{t:"AI UGC videos are our specialty — 5 videos/day, auto-posted to Instagram, TikTok & YouTube. Starting at $2,500/mo.",a:[{l:"Tell Me More",k:"more"},{l:"Book a Call",k:"call"}]},
+  smm:{t:"Full AI SMM = content creation + posting + chatbot sales + strategy. Let's build a custom plan for you.",a:[{l:"Book a Call",k:"call"},{l:"View Pricing",k:"packages"}]},
+  more:{t:"We handle everything — AI avatars, photos, videos, captions, scheduling and a chatbot that converts followers into buyers.",a:[{l:"Book a Call",k:"call"}]},
+  packages:{t:"Starter $750 · Signature $1,300 · Monthly Retainer $2,500/mo. Custom packages available.",a:[{l:"Book a Call",k:"call"}]},
+  call:{t:"Email us: Anzhelaandreievska@gmail.com or call +1 (754) 295-84-86. We reply within 1 hour!",a:[]}
+};
+function rep(k){
+  const r=R[k];
+  document.getElementById('chatTxt').textContent=r.t;
+  const a=document.getElementById('chatActs');
+  a.innerHTML='';
+  r.a.forEach(x=>{
+    const b=document.createElement('button');
+    b.className='chat-act';b.textContent=x.l;
+    b.onclick=()=>rep(x.k);a.appendChild(b);
+  });
+}
+</script>
+</body>
+</html>
