@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D-Flow Corporation — AI Creative Marketing Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#060606;
+  --gold:#C9A84C;
+  --gold2:#E8C96A;
+  --cream:#F5F0E8;
+  --white:#ffffff;
+  --gray:#999;
+  --dark:#0f0f0f;
+  --card:#111;
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--cream);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;cursor:none}
+
+/* CUSTOM CURSOR */
+.cursor{position:fixed;width:12px;height:12px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.1s,width 0.3s,height 0.3s,background 0.3s;mix-blend-mode:difference}
+.cursor-ring{position:fixed;width:40px;height:40px;border:1px solid rgba(201,168,76,0.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform 0.15s ease-out,width 0.3s,height 0.3s}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px 48px;display:flex;align-items:center;justify-content:space-between;transition:background 0.4s}
+nav.scrolled{background:rgba(6,6,6,0.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(201,168,76,0.1)}
+.logo{font-family:'Playfair Display',serif;font-size:1.4rem;font-style:italic;letter-spacing:1px;color:var(--cream)}
+.logo span{color:var(--gold)}
+.nav-right{display:flex;align-items:center;gap:32px}
+.nav-link{font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--gray);text-decoration:none;transition:color 0.3s}
+.nav-link:hover{color:var(--gold)}
+.nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:10px 24px;font-family:'DM Sans',sans-serif;font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;text-decoration:none}
+.nav-cta:hover{background:var(--gold);color:var(--black)}
+
+/* HERO */
+.hero{position:relative;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center}
+
+.hero-slides{position:absolute;inset:0}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1.5s ease;background-size:cover;background-position:center top}
+.slide.active{opacity:1}
+.slide::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(6,6,6,0.3) 0%,rgba(6,6,6,0.5) 50%,rgba(6,6,6,0.85) 100%)}
+.s1{background-image:url('assets/hero/hero1.png')}
+.s2{background-image:url('assets/hero/hero2.png')}
+.s3{background-image:url('assets/hero/hero3.png')}
+.s4{background-image:url('assets/hero/fashion2.png')}
+
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 24px;max-width:900px}
+.hero-pre{font-size:0.65rem;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:28px;opacity:0;animation:fadeUp 0.8s 0.3s forwards}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(3rem,8vw,7rem);font-weight:900;line-height:0.95;margin-bottom:12px;opacity:0;animation:fadeUp 0.8s 0.5s forwards}
+.hero-title .line1{display:block;color:var(--cream)}
+.hero-title .line2{display:block;font-style:italic;color:var(--gold)}
+.hero-sub{font-size:clamp(0.9rem,1.5vw,1.1rem);color:rgba(245,240,232,0.7);line-height:1.8;margin-bottom:48px;opacity:0;animation:fadeUp 0.8s 0.7s forwards}
+.hero-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp 0.8s 0.9s forwards}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--black);border:none;padding:18px 44px;font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.3s}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(201,168,76,0.4)}
+.btn-ghost{background:transparent;border:1px solid rgba(245,240,232,0.3);color:var(--cream);padding:18px 44px;font-family:'DM Sans',sans-serif;font-size:0.8rem;letter-spacing:3px;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.3s}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+.hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn 1s 1.5s forwards}
+.scroll-line{width:1px;height:60px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollPulse 2s ease-in-out infinite}
+.scroll-text{font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--gray)}
+
+/* TICKER */
+.ticker{background:var(--gold);padding:12px 0;overflow:hidden;white-space:nowrap}
+.ticker-track{display:inline-flex;animation:ticker 20s linear infinite}
+.ticker-item{font-family:'Playfair Display',serif;font-style:italic;font-size:0.9rem;color:var(--black);padding:0 40px}
+.ticker-sep{color:rgba(0,0,0,0.4);padding:0 8px}
+
+/* STATEMENT */
+.statement{padding:120px 48px;text-align:center;position:relative;overflow:hidden}
+.statement::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(201,168,76,0.06) 0%,transparent 70%);pointer-events:none}
+.statement-text{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,4rem);font-weight:400;line-height:1.3;max-width:900px;margin:0 auto;color:var(--cream)}
+.statement-text em{font-style:italic;color:var(--gold)}
+.statement-sub{font-size:1rem;color:var(--gray);margin-top:24px;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.8}
+
+/* BEFORE/AFTER */
+.ba-section{padding:80px 48px;max-width:1200px;margin:0 auto}
+.ba-label{font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:16px}
+.ba-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3.5rem);font-weight:400;text-align:center;margin-bottom:60px}
+.ba-title em{font-style:italic;color:var(--gold)}
+.ba-container{position:relative;width:100%;max-width:800px;margin:0 auto;aspect-ratio:9/16;overflow:hidden;cursor:ew-resize}
+@media(min-width:600px){.ba-container{aspect-ratio:4/3}}
+.ba-before,.ba-after{position:absolute;inset:0;background-size:cover;background-position:center top}
+.ba-before{background-image:url('assets/models/zoe.jpg');filter:grayscale(80%) contrast(0.9) brightness(0.8)}
+.ba-after{background-image:url('assets/hero/fashion2.png');clip-path:inset(0 50% 0 0)}
+.ba-line{position:absolute;top:0;bottom:0;left:50%;width:3px;background:var(--gold);transform:translateX(-50%);pointer-events:none;z-index:3}
+.ba-handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:var(--gold);border-radius:50%;z-index:4;display:flex;align-items:center;justify-content:center;pointer-events:none;box-shadow:0 0 20px rgba(201,168,76,0.6)}
+.ba-handle::before{content:'◀ ▶';font-size:0.6rem;color:var(--black);letter-spacing:-2px}
+.ba-labels{display:flex;justify-content:space-between;margin-top:20px;padding:0 20px}
+.ba-tag{font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--gray)}
+.ba-tag.after{color:var(--gold)}
+
+/* MODELS STRIP */
+.models-section{padding:80px 0;overflow:hidden}
+.models-label{font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:16px}
+.models-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,3vw,3rem);font-weight:400;text-align:center;margin-bottom:48px;padding:0 48px}
+.models-title em{font-style:italic;color:var(--gold)}
+.models-track{display:flex;gap:16px;padding:0 48px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+.models-track::-webkit-scrollbar{display:none}
+.model-card{flex:0 0 260px;position:relative;overflow:hidden;background:var(--card)}
+.model-card img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;display:block;transition:transform 0.6s ease}
+.model-card:hover img{transform:scale(1.05)}
+.model-card-over{position:absolute;bottom:0;left:0;right:0;padding:20px;background:linear-gradient(transparent,rgba(6,6,6,0.9));transform:translateY(8px);transition:transform 0.3s}
+.model-card:hover .model-card-over{transform:translateY(0)}
+.model-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-style:italic;color:var(--cream)}
+.model-type{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-top:4px}
+
+/* PACKAGES */
+.packages-section{padding:100px 48px;background:var(--dark)}
+.section-header{text-align:center;margin-bottom:70px}
+.section-pre{font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3.5rem);font-weight:400;color:var(--cream)}
+.section-title em{font-style:italic;color:var(--gold)}
+
+.client-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
+.ctab{background:transparent;border:1px solid rgba(245,240,232,0.1);color:var(--gray);padding:10px 24px;font-family:'DM Sans',sans-serif;font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s}
+.ctab.active,.ctab:hover{border-color:var(--gold);color:var(--gold)}
+
+.packages-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(201,168,76,0.1);max-width:1200px;margin:0 auto}
+.pkg{background:var(--dark);padding:40px 32px;position:relative;transition:background 0.3s}
+.pkg:hover{background:#161616}
+.pkg.featured{background:#0d0d0d}
+.pkg.featured::before{content:'MOST POPULAR';position:absolute;top:0;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--black);font-size:0.58rem;font-weight:500;letter-spacing:3px;padding:6px 20px}
+.pkg-name{font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.pkg-price{font-family:'Playfair Display',serif;font-size:3.2rem;font-weight:400;color:var(--cream);line-height:1}
+.pkg-per{font-size:0.8rem;color:var(--gray);margin-bottom:8px}
+.pkg-delivery{font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid rgba(201,168,76,0.15)}
+.pkg-list{list-style:none;margin-bottom:36px}
+.pkg-list li{font-size:0.9rem;color:#ccc;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.04);display:flex;align-items:flex-start;gap:10px;line-height:1.5}
+.pkg-list li::before{content:'—';color:var(--gold);flex-shrink:0;margin-top:1px}
+.pkg-btn{width:100%;background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--cream);padding:14px;font-family:'DM Sans',sans-serif;font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;text-decoration:none;display:block;text-align:center}
+.pkg-btn:hover,.pkg.featured .pkg-btn{background:linear-gradient(135deg,var(--gold),var(--gold2));border-color:transparent;color:var(--black);font-weight:500}
+
+/* HANDS FREE PACKAGE */
+.hf-section{padding:80px 48px;max-width:1200px;margin:0 auto}
+.hf-card{border:1px solid var(--gold);padding:60px;position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(201,168,76,0.05) 0%,transparent 60%)}
+.hf-card::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(201,168,76,0.1) 0%,transparent 70%);pointer-events:none}
+.hf-tag{font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.hf-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.8rem);font-weight:400;margin-bottom:8px;color:var(--cream)}
+.hf-title em{font-style:italic;color:var(--gold)}
+.hf-price{font-family:'Playfair Display',serif;font-size:5rem;font-weight:900;color:var(--gold);line-height:1;margin-bottom:8px}
+.hf-price-note{font-size:0.85rem;color:var(--gray);margin-bottom:40px}
+.hf-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:48px}
+.hf-item{display:flex;align-items:flex-start;gap:12px;font-size:0.9rem;color:#ccc;line-height:1.5}
+.hf-item::before{content:'✦';color:var(--gold);flex-shrink:0;font-size:0.7rem;margin-top:3px}
+.hf-actions{display:flex;gap:16px;flex-wrap:wrap}
+
+/* ABOUT */
+.about-section{padding:100px 48px;display:grid;grid-template-columns:1fr 1fr;gap:80px;max-width:1200px;margin:0 auto;align-items:center}
+.about-img-wrap{position:relative}
+.about-img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;display:block}
+.about-badge{position:absolute;bottom:32px;right:-20px;background:var(--gold);padding:20px 24px;text-align:center}
+.about-badge-num{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;color:var(--black);line-height:1}
+.about-badge-txt{font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--black);margin-top:4px}
+.about-content{}
+.about-pre{font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.about-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,3vw,3.2rem);font-weight:400;line-height:1.2;margin-bottom:28px;color:var(--cream)}
+.about-title em{font-style:italic;color:var(--gold)}
+.about-text{font-size:1rem;line-height:1.9;color:#aaa;margin-bottom:40px}
+.about-stats{display:flex;gap:40px}
+.astat-n{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:400;color:var(--cream)}
+.astat-l{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-top:4px}
+
+/* TOWEL SECTION */
+.towel-section{padding:80px 48px;background:var(--dark);text-align:center}
+.towel-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;text-align:left}
+.towel-img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top}
+.towel-quote{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,2.5vw,2.5rem);font-style:italic;line-height:1.4;color:var(--cream);margin-bottom:24px}
+.towel-quote em{color:var(--gold);font-style:normal}
+.towel-sub{font-size:0.9rem;color:var(--gray);line-height:1.8;margin-bottom:32px}
+
+/* CTA */
+.cta-section{padding:120px 48px;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(201,168,76,0.08) 0%,transparent 65%)}
+.cta-pre{font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;position:relative}
+.cta-title{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,6vw,6rem);font-weight:900;line-height:1;margin-bottom:24px;position:relative;color:var(--cream)}
+.cta-title em{font-style:italic;color:var(--gold)}
+.cta-sub{font-size:1rem;color:var(--gray);margin-bottom:56px;position:relative;line-height:1.8}
+.cta-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;margin-bottom:48px}
+.cta-contact{display:flex;gap:32px;justify-content:center;flex-wrap:wrap;position:relative}
+.contact-item{font-size:0.85rem;color:var(--gray);display:flex;align-items:center;gap:8px}
+.contact-item a{color:var(--cream);text-decoration:none;transition:color 0.2s}
+.contact-item a:hover{color:var(--gold)}
+
+/* CHAT WIDGET */
+.chat-w{position:fixed;bottom:28px;right:28px;z-index:200;display:flex;flex-direction:column;align-items:flex-end;gap:14px}
+.chat-bubble{background:#0f0f0f;border:1px solid rgba(201,168,76,0.3);padding:20px 22px;max-width:290px;font-size:0.85rem;line-height:1.65;color:var(--cream);display:none;position:relative;animation:fadeUp 0.3s ease}
+.chat-bubble.show{display:block}
+.chat-bubble::after{content:'';position:absolute;bottom:-9px;right:22px;width:0;height:0;border-left:9px solid transparent;border-right:9px solid transparent;border-top:9px solid rgba(201,168,76,0.3)}
+.chat-av{width:60px;height:60px;border-radius:50%;overflow:hidden;border:2px solid var(--gold);cursor:pointer;transition:transform 0.3s,box-shadow 0.3s;box-shadow:0 4px 20px rgba(201,168,76,0.3)}
+.chat-av:hover{transform:scale(1.1);box-shadow:0 6px 30px rgba(201,168,76,0.5)}
+.chat-av img{width:100%;height:100%;object-fit:cover;object-position:top}
+.chat-x{position:absolute;top:10px;right:12px;background:none;border:none;color:var(--gray);font-size:1rem;cursor:pointer;line-height:1}
+.chat-acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.chat-act{background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--gold);padding:7px 14px;font-size:0.68rem;letter-spacing:1px;cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif}
+.chat-act:hover{background:rgba(201,168,76,0.1)}
+
+/* FOOTER */
+footer{padding:32px 48px;border-top:1px solid rgba(201,168,76,0.1);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.2rem;font-style:italic;color:var(--cream)}
+.footer-logo span{color:var(--gold)}
+footer p{font-size:0.7rem;color:var(--gray)}
+
+/* DIVIDER */
+.divider{width:100%;height:1px;background:linear-gradient(to right,transparent,rgba(201,168,76,0.2),transparent)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes scrollPulse{0%,100%{opacity:1;transform:scaleY(1)}50%{opacity:0.5;transform:scaleY(0.7)}}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.8s ease,transform 0.8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:16px 24px}
+  .nav-right .nav-link{display:none}
+  .hero-title{font-size:clamp(2.5rem,10vw,5rem)}
+  .packages-grid{grid-template-columns:1fr}
+  .about-section{grid-template-columns:1fr;gap:40px}
+  .about-badge{right:0}
+  .hf-grid{grid-template-columns:1fr}
+  .hf-card{padding:40px 28px}
+  .towel-inner{grid-template-columns:1fr;gap:32px}
+  .statement{padding:80px 24px}
+  .ba-section,.hf-section{padding:60px 24px}
+  .packages-section,.cta-section{padding:80px 24px}
+  .models-track{padding:0 24px}
+}
+@media(max-width:600px){
+  .hero-actions{flex-direction:column;align-items:center}
+  .btn-primary,.btn-ghost{width:100%;text-align:center}
+  .about-stats{gap:24px}
+  .hf-price{font-size:3.5rem}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="logo"><span>D-Flow</span> Corporation</div>
+  <div class="nav-right">
+    <a href="#packages" class="nav-link">Services</a>
+    <a href="#about" class="nav-link">About</a>
+    <a href="portfolio.html" class="nav-link">Portfolio</a>
+    <a href="mailto:Anzhelaandreievska@gmail.com" class="nav-cta">Get Started</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-slides">
+    <div class="slide s1 active"></div>
+    <div class="slide s2"></div>
+    <div class="slide s3"></div>
+    <div class="slide s4"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-pre">D-Flow Corporation · AI Creative Marketing</div>
+    <h1 class="hero-title">
+      <span class="line1">Your competitor already looks like this.</span>
+      <span class="line2">Do you?</span>
+    </h1>
+    <p class="hero-sub">Do you?<br>AI-generated photos, videos & UGC that sell — delivered in 24 hours.</p>
+    <div class="hero-actions">
+      <a href="#packages" class="btn-primary">See Our Work</a>
+      <a href="mailto:Anzhelaandreievska@gmail.com" class="btn-ghost">Get Started Now</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-text">Scroll</div>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">AI Photos</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">UGC Videos</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">AI Avatars</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">Auto-Posting</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">Chatbot Sales</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">24h Delivery</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">357 Photos / 5 Hours</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">Hands-Free Growth</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">AI Photos</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">UGC Videos</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">AI Avatars</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">Auto-Posting</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">Chatbot Sales</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">24h Delivery</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">357 Photos / 5 Hours</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">Hands-Free Growth</span><span class="ticker-sep">✦</span>
+  </div>
+</div>
+
+<!-- STATEMENT -->
+<section class="statement reveal">
+  <p class="statement-text">
+    No photoshoot. No studio. No waiting.<br>
+    Just <em>content that converts</em> —<br>
+    while you sleep.
+  </p>
+  <p class="statement-sub">D-Flow generates AI photos, videos and UGC content at scale. We post it automatically. A chatbot sells for you. You check the results.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- BEFORE / AFTER -->
+<section class="ba-section reveal">
+  <div class="ba-label">The D-Flow Effect</div>
+  <h2 class="ba-title">This is what AI does<br>to <em>your brand</em></h2>
+  <div class="ba-container" id="baContainer">
+    <div class="ba-before"></div>
+    <div class="ba-after" id="baAfter"></div>
+    <div class="ba-line" id="baLine"></div>
+    <div class="ba-handle" id="baHandle"></div>
+  </div>
+  <div class="ba-labels">
+    <span class="ba-tag">Before D-Flow</span>
+    <span class="ba-tag after">After D-Flow ✦</span>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MODELS -->
+<section class="models-section reveal">
+  <div class="models-label">AI Talent Roster</div>
+  <h2 class="models-title">Your brand. <em>Every face.</em><br>Zero casting budget.</h2>
+  <div class="models-track">
+    <div class="model-card">
+      <img src="assets/models/marisol.jpg" alt="Marisol" loading="lazy">
+      <div class="model-card-over">
+        <div class="model-name">Marisol</div>
+        <div class="model-type">Vitiligo · Trend Pioneer</div>
+      </div>
+    </div>
+    <div class="model-card">
+      <img src="assets/models/amara.jpg" alt="Amara" loading="lazy">
+      <div class="model-card-over">
+        <div class="model-name">Amara</div>
+        <div class="model-type">Editorial · High Fashion</div>
+      </div>
+    </div>
+    <div class="model-card">
+      <img src="assets/models/luna.jpg" alt="Luna" loading="lazy">
+      <div class="model-card-over">
+        <div class="model-name">Luna</div>
+        <div class="model-type">Ethereal · Avant-Garde</div>
+      </div>
+    </div>
+    <div class="model-card">
+      <img src="assets/models/zoe.jpg" alt="Zoe" loading="lazy">
+      <div class="model-card-over">
+        <div class="model-name">Zoe</div>
+        <div class="model-type">Lifestyle · UGC Native</div>
+      </div>
+    </div>
+    <div class="model-card">
+      <img src="assets/fashion/fashion1.webp" alt="Sofia" loading="lazy">
+      <div class="model-card-over">
+        <div class="model-name">Sofia</div>
+        <div class="model-type">Beach · Luxury Fashion</div>
+      </div>
+    </div>
+    <div class="model-card">
+      <img src="assets/fashion/fashion3.webp" alt="Vera" loading="lazy">
+      <div class="model-card-over">
+        <div class="model-name">Vera</div>
+        <div class="model-type">Ocean · Cinematic</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PACKAGES -->
+<section class="packages-section reveal" id="packages">
+  <div class="section-header">
+    <div class="section-pre">Choose Your Package</div>
+    <h2 class="section-title">Content for every <em>ambition</em></h2>
+  </div>
+
+  <div class="client-tabs">
+    <button class="ctab active" onclick="showPkgs('all',this)">All Packages</button>
+    <button class="ctab" onclick="showPkgs('influencer',this)">Influencer</button>
+    <button class="ctab" onclick="showPkgs('brand',this)">Brand</button>
+    <button class="ctab" onclick="showPkgs('restaurant',this)">Restaurant</button>
+  </div>
+
+  <div class="packages-grid" id="pkgGrid">
+    <div class="pkg" data-type="influencer brand">
+      <div class="pkg-name">Starter Package</div>
+      <div class="pkg-price">$750</div>
+      <div class="pkg-per">one-time</div>
+      <div class="pkg-delivery">⚡ Delivery: 24 hours</div>
+      <ul class="pkg-list">
+        <li>6 high-resolution AI photos</li>
+        <li>2 short AI videos (6 sec)</li>
+        <li>1 ready-to-post Reel</li>
+        <li>1 round of revisions</li>
+        <li>Commercial usage rights</li>
+      </ul>
+      <a href="mailto:Anzhelaandreievska@gmail.com" class="pkg-btn">Get Started</a>
+    </div>
+
+    <div class="pkg featured" data-type="influencer brand">
+      <div class="pkg-name">Signature Package</div>
+      <div class="pkg-price">$1,300</div>
+      <div class="pkg-per">one-time</div>
+      <div class="pkg-delivery">⚡ Delivery: 72 hours</div>
+      <ul class="pkg-list">
+        <li>15 high-resolution AI photos</li>
+        <li>5 short AI videos (7 sec)</li>
+        <li>3 ready-to-post Reels</li>
+        <li>2 rounds of revisions</li>
+        <li>60-day commercial rights</li>
+        <li>Organic + paid ads usage</li>
+      </ul>
+      <a href="mailto:Anzhelaandreievska@gmail.com" class="pkg-btn">Get Started</a>
+    </div>
+
+    <div class="pkg" data-type="influencer brand">
+      <div class="pkg-name">Monthly Retainer</div>
+      <div class="pkg-price">$2,500</div>
+      <div class="pkg-per">per month</div>
+      <div class="pkg-delivery">⚡ Setup: 7 days</div>
+      <ul class="pkg-list">
+        <li>30 AI photos + 10 videos/mo</li>
+        <li>5 ready-to-post Reels</li>
+        <li>5 rounds of revisions</li>
+        <li>Full whitelisting for ads</li>
+        <li>60-day commercial rights</li>
+        <li>Auto-posting included</li>
+      </ul>
+      <a href="mailto:Anzhelaandreievska@gmail.com" class="pkg-btn">Get Started</a>
+    </div>
+
+    <div class="pkg" data-type="influencer brand">
+      <div class="pkg-name">AI Avatar Expert</div>
+      <div class="pkg-price">$1,200</div>
+      <div class="pkg-per">one-time</div>
+      <div class="pkg-delivery">⚡ Delivery: 72 hours</div>
+      <ul class="pkg-list">
+        <li>5 AI talking head videos (60 sec)</li>
+        <li>Custom script for each video</li>
+        <li>Subtitles + brand overlay</li>
+        <li>Ready to publish</li>
+        <li>Perfect for experts who hate camera</li>
+      </ul>
+      <a href="mailto:Anzhelaandreievska@gmail.com" class="pkg-btn">Get Started</a>
+    </div>
+
+    <div class="pkg featured" data-type="brand">
+      <div class="pkg-name">Your Twin UGC</div>
+      <div class="pkg-price">$1,500</div>
+      <div class="pkg-per">one-time</div>
+      <div class="pkg-delivery">⚡ Delivery: 72 hours</div>
+      <ul class="pkg-list">
+        <li>10 videos with your AI twin</li>
+        <li>Different locations & outfits</li>
+        <li>Ready for TikTok / Instagram</li>
+        <li>Your face, your brand, zero effort</li>
+        <li>Commercial usage rights</li>
+      </ul>
+      <a href="mailto:Anzhelaandreievska@gmail.com" class="pkg-btn">Get Started</a>
+    </div>
+
+    <div class="pkg" data-type="brand">
+      <div class="pkg-name">UGC Many Models</div>
+      <div class="pkg-price">$1,800</div>
+      <div class="pkg-per">one-time</div>
+      <div class="pkg-delivery">⚡ Delivery: 5 days</div>
+      <ul class="pkg-list">
+        <li>10 UGC videos with 5 AI models</li>
+        <li>Reviews, unboxings, lifestyle</li>
+        <li>Diverse cast — zero casting fees</li>
+        <li>Ready for all platforms</li>
+        <li>60-day commercial rights</li>
+      </ul>
+      <a href="mailto:Anzhelaandreievska@gmail.com" class="pkg-btn">Get Started</a>
+    </div>
+
+    <div class="pkg" data-type="restaurant">
+      <div class="pkg-name">Restaurant Content</div>
+      <div class="pkg-price">$1,997</div>
+      <div class="pkg-per">per month</div>
+      <div class="pkg-delivery">⚡ Setup: 5 days</div>
+      <ul class="pkg-list">
+        <li>30 AI food & cocktail photos</li>
+        <li>8 Reels (events, ambiance)</li>
+        <li>12 Stories per month</li>
+        <li>Strategy + captions + hashtags</li>
+        <li>Auto-posting included</li>
+      </ul>
+      <a href="mailto:Anzhelaandreievska@gmail.com" class="pkg-btn">Get Started</a>
+    </div>
+
+    <div class="pkg featured" data-type="brand">
+      <div class="pkg-name">Fashion Lookbook</div>
+      <div class="pkg-price">$1,500</div>
+      <div class="pkg-per">one-time</div>
+      <div class="pkg-delivery">⚡ Delivery: 5 days</div>
+      <ul class="pkg-list">
+        <li>20 photos — AI models wear your pieces</li>
+        <li>3 different model types</li>
+        <li>5 different locations</li>
+        <li>Ready for website + social</li>
+        <li>No photoshoot, no casting</li>
+      </ul>
+      <a href="mailto:Anzhelaandreievska@gmail.com" class="pkg-btn">Get Started</a>
+    </div>
+
+    <div class="pkg" data-type="brand">
+      <div class="pkg-name">Product Launch Pack</div>
+      <div class="pkg-price">$2,500</div>
+      <div class="pkg-per">one-time</div>
+      <div class="pkg-delivery">⚡ Delivery: 5 days</div>
+      <ul class="pkg-list">
+        <li>15 AI product photos (various styles)</li>
+        <li>5 UGC videos with AI models</li>
+        <li>3 ad-ready videos for targeting</li>
+        <li>30-day content plan</li>
+        <li>60-day commercial rights</li>
+      </ul>
+      <a href="mailto:Anzhelaandreievska@gmail.com" class="pkg-btn">Get Started</a>
+    </div>
+  </div>
+</section>
+
+<!-- HANDS FREE -->
+<section class="hf-section reveal">
+  <div class="hf-card">
+    <div class="hf-tag">✦ Our Most Powerful Package</div>
+    <h2 class="hf-title">Hands-Free <em>Growth</em></h2>
+    <div class="hf-price">$4,997</div>
+    <div class="hf-price-note">per month · everything included · zero effort from you</div>
+    <div class="hf-grid">
+      <div class="hf-item">5 AI videos per day (75/month)</div>
+      <div class="hf-item">Auto-posting to TikTok, YouTube, Instagram, X</div>
+      <div class="hf-item">20 AI photos for Stories monthly</div>
+      <div class="hf-item">AI Chatbot for DM sales conversion</div>
+      <div class="hf-item">Voice Agent for automated calls</div>
+      <div class="hf-item">Full content strategy & scripts</div>
+      <div class="hf-item">Hooks, captions & hashtags</div>
+      <div class="hf-item">Weekly performance reports</div>
+    </div>
+    <div class="hf-actions">
+      <a href="mailto:Anzhelaandreievska@gmail.com" class="btn-primary">Start Today</a>
+      <a href="tel:+17542958486" class="btn-ghost">Call +1 (754) 295-84-86</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section class="about-section reveal" id="about">
+  <div class="about-img-wrap">
+    <img src="assets/hero/hero3.png" alt="D-Flow CEO" class="about-img">
+    <div class="about-badge">
+      <div class="about-badge-num">357</div>
+      <div class="about-badge-txt">Photos in 5 hours</div>
+    </div>
+  </div>
+  <div class="about-content">
+    <div class="about-pre">About D-Flow</div>
+    <h2 class="about-title">The agency that<br><em>never sleeps.</em></h2>
+    <p class="about-text">D-Flow Corporation is a fully AI-powered creative marketing agency. We generate campaigns that look like they cost $50,000 — at a fraction of the price and time. While your competitors are still in meetings, we've already delivered.</p>
+    <p class="about-text">Founded by Anzhela Andreievska — model, photographer, AI creative director — D-Flow combines editorial taste with cutting-edge AI technology to produce content that doesn't just look good. It sells.</p>
+    <div class="about-stats">
+      <div>
+        <div class="astat-n">24h</div>
+        <div class="astat-l">Fastest delivery</div>
+      </div>
+      <div>
+        <div class="astat-n">5+</div>
+        <div class="astat-l">Industries served</div>
+      </div>
+      <div>
+        <div class="astat-n">100%</div>
+        <div class="astat-l">AI generated</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TOWEL MOMENT -->
+<section class="towel-section reveal">
+  <div class="towel-inner">
+    <img src="assets/hero/hero4.png" alt="D-Flow at work" class="towel-img">
+    <div>
+      <p class="towel-quote">"While your competitors are still in meetings, <em>D-Flow already delivered.</em>"</p>
+      <p class="towel-sub">We're not a traditional agency. We don't need a studio, a crew, or a two-week production timeline. We need your brief — and 24 hours.</p>
+      <a href="mailto:Anzhelaandreievska@gmail.com" class="btn-primary">Let's Talk</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section reveal">
+  <div class="cta-pre">Ready?</div>
+  <h2 class="cta-title">Your brand.<br><em>Unstoppable.</em></h2>
+  <p class="cta-sub">Book a free 30-minute strategy call.<br>No commitment. Just results.</p>
+  <div class="cta-actions">
+    <a href="mailto:Anzhelaandreievska@gmail.com" class="btn-primary">Email Us Now</a>
+    <a href="tel:+17542958486" class="btn-ghost">Call +1 (754) 295-84-86</a>
+  </div>
+  <div class="cta-contact">
+    <div class="contact-item">📧 <a href="mailto:Anzhelaandreievska@gmail.com">Anzhelaandreievska@gmail.com</a></div>
+    <div class="contact-item">📞 <a href="tel:+17542958486">+1 (754) 295-84-86</a></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><span>D-Flow</span> Corporation</div>
+  <p>© 2025 D-Flow Corporation. AI Creative Marketing Agency.</p>
+  <p style="font-size:0.65rem;color:#444">AI Photos · AI Video · UGC · SMM · Chatbots</p>
+</footer>
+
+<!-- CHAT WIDGET -->
+<div class="chat-w" id="chatW">
+  <div class="chat-bubble" id="chatB">
+    <button class="chat-x" onclick="document.getElementById('chatB').classList.remove('show')">✕</button>
+    <div id="chatTxt">Hi! I'm the D-Flow AI assistant. What kind of content do you need?</div>
+    <div class="chat-acts" id="chatActs">
+      <button class="chat-act" onclick="rep('photos')">AI Photos</button>
+      <button class="chat-act" onclick="rep('video')">UGC Videos</button>
+      <button class="chat-act" onclick="rep('full')">Full Service</button>
+    </div>
+  </div>
+  <div class="chat-av" onclick="document.getElementById('chatB').classList.toggle('show')">
+    <img src="assets/avatar/avatar.png" alt="D-Flow AI">
+  </div>
+</div>
+
+<script>
+// CURSOR
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px'; cur.style.top = e.clientY + 'px';
+  setTimeout(() => { ring.style.left = e.clientX + 'px'; ring.style.top = e.clientY + 'px'; }, 80);
+});
+
+// NAV SCROLL
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// HERO SLIDESHOW
+let si = 0;
+const slides = document.querySelectorAll('.slide');
+setInterval(() => {
+  slides[si].classList.remove('active');
+  si = (si + 1) % slides.length;
+  slides[si].classList.add('active');
+}, 4000);
+
+// BEFORE/AFTER SLIDER
+const baCont = document.getElementById('baContainer');
+const baAfter = document.getElementById('baAfter');
+const baLine = document.getElementById('baLine');
+const baHandle = document.getElementById('baHandle');
+let dragging = false;
+
+function setBA(x) {
+  const rect = baCont.getBoundingClientRect();
+  let pct = Math.min(Math.max((x - rect.left) / rect.width * 100, 2), 98);
+  baAfter.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+  baLine.style.left = pct + '%';
+  baHandle.style.left = pct + '%';
+}
+
+baCont.addEventListener('mousedown', e => { dragging = true; setBA(e.clientX); });
+document.addEventListener('mousemove', e => { if (dragging) setBA(e.clientX); });
+document.addEventListener('mouseup', () => { dragging = false; });
+baCont.addEventListener('touchstart', e => { dragging = true; setBA(e.touches[0].clientX); });
+document.addEventListener('touchmove', e => { if (dragging) setBA(e.touches[0].clientX); });
+document.addEventListener('touchend', () => { dragging = false; });
+
+// SCROLL REVEAL
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// PACKAGE FILTER
+function showPkgs(type, btn) {
+  document.querySelectorAll('.ctab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.pkg').forEach(p => {
+    const t = p.dataset.type || '';
+    p.style.display = (type === 'all' || t.includes(type)) ? 'block' : 'none';
+  });
+}
+
+// CHAT
+setTimeout(() => document.getElementById('chatB').classList.add('show'), 4000);
+const R = {
+  photos:{t:"Great! Our AI photo packages start at $750 
